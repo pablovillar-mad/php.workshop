@@ -1,0 +1,47 @@
+version: '3.9'
+services:
+  nginx:
+    image: nginx
+    ports:
+      - '8900:80'
+    volumes:
+      - '.:/code'
+      - './.docker/nginx/nginx.conf:/etc/nginx/nginx.conf'
+      - './.docker/nginx/conf.d:/etc/nginx/conf.d'
+    networks:
+      test:
+        aliases:
+          - api.test-dev.local
+    depends_on:
+      - app
+
+  app:
+    build: ./.docker/php
+    networks:
+      - test
+    volumes:
+      - '.:/code'
+      - './.docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini'
+
+  database:
+    image: mariadb:10.3.27
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_HOST: 127.0.0.1
+    networks:
+      - test
+    volumes:
+      - 'mysqlvol:/var/lib/mysql'
+
+networks:
+  test:
+    external: true
+
+volumes:
+  mysqlvol:
+    driver: local
