@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.2-fpm-alpine
 
 RUN apk update && apk add build-base cmake git curl-dev libxml2-dev zlib-dev libpng-dev libzip-dev oniguruma-dev \
     icu-dev
