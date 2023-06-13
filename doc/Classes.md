@@ -23,8 +23,8 @@ An attribute is a variable that is defined inside a class and is used to store d
 class ClassName
 {
     // attributes
-    public $attribute1;
-    private $attribute2;
+    public int $attribute1;
+    private array $attribute2;
 
     // methods
     public function method1()
@@ -38,6 +38,29 @@ class ClassName
     }
 }
 ```
+
+The attributes can be public, protected or private. If they are public, they can be accessed from outside the class. If they are private, they can only be accessed from within the class and if they are
+protected, they can be accessed from within the class and from within the classes that inherit from it.
+
+```php
+class ClassName
+{
+    public string $attribute1;
+    private string $attribute2;
+    protected string $attribute3;
+}
+```
+
+The attributes can be of any type, including other classes.
+
+```php
+class ClassName
+{
+    public string $attribute1;
+    public ClassName2 $attribute2;
+}
+```
+
 
 ## What is an object?
 
@@ -106,7 +129,13 @@ An abstract class is a class that cannot be instantiated. It is used to define t
 ```php
 abstract class AbstractClassName
 {
-    abstract public function method1(): void;
+    protected $attribute;
+    
+    protected function method1(): void
+    {
+        // code
+    }
+    
 }
 ```
 
