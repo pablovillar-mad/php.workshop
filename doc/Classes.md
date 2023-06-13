@@ -25,11 +25,12 @@ class ClassName
     // attributes
     public int $attribute1;
     private array $attribute2;
+    protected string $attribute3;
 
     // methods
-    public function method1()
+    public function method1(string $param1): void
     {
-        // code
+        $this->attribute1 = $param1;
     }
 
     private function method2()
@@ -79,15 +80,21 @@ A constructor is a special method that is called when an object is created. It i
 ```php
 class ClassName
 {
-    public $attribute;
+    public string $attribute;
 
-    public function __construct($value)
+    public function __construct(string $value)
     {
         $this->attribute = $value;
+    }
+    
+    public function method1(): void
+    {
+        // code
     }
 }
 
 $object = new ClassName('value');
+$object->method1();
 ```
 
 ## Inheritance
@@ -95,9 +102,16 @@ $object = new ClassName('value');
 Inheritance is a mechanism that allows a class to inherit the behavior of another class.
 
 ```php
-class ClassName extends ParentClassName
+class ChildClass extends ClassName
 {
-    // code
+    public function __construct() {
+        parent::__construct('hola');
+    }
+    
+    public function method2(): void
+    {
+       $this->method1();
+    }
 }
 ```
 
@@ -106,16 +120,16 @@ class ClassName extends ParentClassName
 An interface is a contract that defines the behavior that a class must implement.
 
 ```php
-interface InterfaceName
+interface Vehicle
 {
-    public function method1(): void;
+    public function accelerate(): void;
 }
 ```
 
 ```php
-class ClassName implements InterfaceName
+class Car implements Vehicle
 {
-    public function method1(): void
+    public function accelerate(): void
     {
         // code
     }
@@ -127,7 +141,7 @@ class ClassName implements InterfaceName
 An abstract class is a class that cannot be instantiated. It is used to define the behavior that a class must implement.
 
 ```php
-abstract class AbstractClassName
+abstract class Employee
 {
     protected $attribute;
     
@@ -140,7 +154,7 @@ abstract class AbstractClassName
 ```
 
 ```php
-class ClassName extends AbstractClassName
+class Programmer extends Employee
 {
     public function method1(): void
     {
