@@ -2,3 +2,13 @@ exercise:
   path: /exercise
   controller: App\Product\Infrastructure\Controller\TestController::exercise
   methods: GET
+
+create_product:
+  path: /product
+  controller: App\Product\Infrastructure\Controller\TestController::createProduct
+  methods: POST
+
+get_product:
+  path: /product/{productId}
+  controller: App\Product\Infrastructure\Controller\TestController::getProduct
+  methods: GET

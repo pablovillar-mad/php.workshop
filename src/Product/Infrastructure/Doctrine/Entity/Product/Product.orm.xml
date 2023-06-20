@@ -1,0 +1,17 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                   https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+    <entity name="App\Product\Domain\Product\Product"
+            table="product"
+            repository-class="App\Product\Infrastructure\Doctrine\Entity\Repository\ProductRepository">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+        <field name="name" column="name" type="string"/>
+        <field name="email" column="email" type="string"/>
+        <field name="color" column="color" type="string"/>
+        <field name="type" column="type" type="string"/>
+        <field name="isActive" column="is_active" type="boolean"/>
+    </entity>
+</doctrine-mapping>
