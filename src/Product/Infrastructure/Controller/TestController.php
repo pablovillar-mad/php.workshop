@@ -3,6 +3,7 @@
 namespace App\Product\Infrastructure\Controller;
 
 use App\Product\Application\CreatorInterface;
+use App\Product\Application\Product\Exception\ProductNotExistsException;
 use App\Product\Application\Product\UseCase\CreateProductUseCase;
 use App\Product\Application\Product\UseCase\GetProductUseCase;
 use App\Product\Domain\Product\Estanteria;
@@ -67,7 +68,17 @@ class TestController extends AbstractController
 
     public function getProduct(int $productId): JsonResponse
     {
-        $product = $this->getProductUseCase->execute($productId);
+        try {
+            $product = $this->getProductUseCase->execute($productId);
+        }
+        catch(ProductNotExistsException $exception) {
+            return new JsonResponse(
+                [
+                    $exception->getMessage(),
+                    $exception->getProductId()
+                ],
+                404);
+        }
 
         return new JsonResponse($product);
     }
